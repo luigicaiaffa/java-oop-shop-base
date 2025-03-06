@@ -35,8 +35,16 @@ public class Prodotto {
     }
 
     // Metodo per avere il prezzo base
+    public void getPrezzo() {
+        System.out.println("Prezzo Base: " + prezzo);
+    }
 
     // Metodo per calcolare prezzo con IVA
+    public void getPrezzoConIva() {
+        BigDecimal ivaDecimale = new BigDecimal(iva.replace("%", "")).divide(new BigDecimal("100"));
+
+        System.out.println(ivaDecimale);
+    }
 
     // Metodo per avere nome esteso (codice-nome)
 }
