@@ -4,9 +4,11 @@ import java.math.BigDecimal;
 
 public class Main {
     public static void main(String[] args) {
-        Prodotto prodotto = new Prodotto("Pallone", "Pallone in cuoio da calcio", new BigDecimal("10.50"), "22%");
+        Prodotto prodotto = new Prodotto("Pallone", "Pallone da calcio in cuoio", new BigDecimal("10.50"), "22%");
 
-        prodotto.stampaDettagli();
+        prodotto.getPrezzo();
         prodotto.getPrezzoConIva();
+        prodotto.getNomeEsteso();
+        prodotto.stampaDettagli();
     }
 }
