@@ -1,6 +1,7 @@
 package org.lessons.java.shop;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Random;
 
 public class Prodotto {
@@ -41,9 +42,11 @@ public class Prodotto {
 
     // Metodo per calcolare prezzo con IVA
     public void getPrezzoConIva() {
-        BigDecimal ivaDecimale = new BigDecimal(iva.replace("%", "")).divide(new BigDecimal("100"));
+        BigDecimal ivaDecimale = new BigDecimal(iva.replace("%", ""))
+                .divide(new BigDecimal("100"));
 
-        System.out.println(ivaDecimale);
+        BigDecimal prezzoConIva = prezzo.multiply(ivaDecimale).add(prezzo).setScale(2, RoundingMode.HALF_EVEN);
+        System.out.println("Prezzo con Iva: " + prezzoConIva + "$");
     }
 
     // Metodo per avere nome esteso (codice-nome)
