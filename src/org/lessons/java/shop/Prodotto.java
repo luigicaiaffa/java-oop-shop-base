@@ -1,6 +1,7 @@
 package org.lessons.java.shop;
 
 import java.math.BigDecimal;
+import java.util.Random;
 
 public class Prodotto {
 
@@ -15,7 +16,8 @@ public class Prodotto {
     public Prodotto(String nome, String descrizione, BigDecimal prezzo, String iva) {
 
         // Genera un codice casuale
-        this.codice = (int) (Math.random() * 999);
+        Random random = new Random();
+        this.codice = random.nextInt(100);
 
         this.nome = nome;
         this.descrizione = descrizione;
