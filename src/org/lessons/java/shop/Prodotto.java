@@ -7,11 +7,11 @@ import java.util.Random;
 public class Prodotto {
 
     // Variabili di istanza
-    public int codice;
-    public String nome;
-    public String descrizione;
-    public BigDecimal prezzo;
-    public String iva;
+    private int codice;
+    private String nome;
+    private String descrizione;
+    private BigDecimal prezzo;
+    private String iva;
 
     // Costruttore
     public Prodotto(String nome, String descrizione, BigDecimal prezzo, String iva) {
@@ -26,6 +26,40 @@ public class Prodotto {
         this.iva = iva;
     }
 
+    // Costruttore senza parametri
+    public Prodotto() {
+
+        // Genera un codice casuale
+        Random random = new Random();
+        this.codice = random.nextInt(100);
+
+        this.nome = "Prodotto senza nome";
+        this.descrizione = "Nessuna descrizione inserita";
+        this.prezzo = new BigDecimal("0.00");
+        this.iva = "0%";
+    }
+
+    // Metodi getter e setter
+    public int getCodice() {
+        return this.codice;
+    }
+
+    public String getNome() {
+        return this.nome;
+    }
+
+    public String getDescrizione() {
+        return this.descrizione;
+    }
+
+    public String getIva() {
+        return this.iva;
+    }
+
+    public BigDecimal getPrezzo() {
+        return prezzo.setScale(2, RoundingMode.HALF_EVEN);
+    }
+
     // Metodo per stampare dettagli del prodotto
     public void stampaDettagli() {
         System.out.println("Prodotto: " + getNomeEsteso());
@@ -33,11 +67,6 @@ public class Prodotto {
         System.out.println("Prezzo Senza IVA: " + getPrezzo());
         System.out.println("IVA: " + iva);
         System.out.println("Prezzo con IVA: " + getPrezzoConIva());
-    }
-
-    // Metodo per avere il prezzo base
-    public BigDecimal getPrezzo() {
-        return prezzo.setScale(2, RoundingMode.HALF_EVEN);
     }
 
     // Metodo per calcolare prezzo con IVA
