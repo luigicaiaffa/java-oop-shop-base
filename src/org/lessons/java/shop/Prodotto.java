@@ -6,14 +6,14 @@ import java.util.Random;
 
 public class Prodotto {
 
-    // Variabili di istanza
+    // # Variabili di istanza
     private int codice;
     private String nome;
     private String descrizione;
     private BigDecimal prezzo;
     private String iva;
 
-    // Costruttore
+    // # Costruttore
     public Prodotto(String nome, String descrizione, BigDecimal prezzo, String iva) {
 
         // Genera un codice casuale
@@ -26,7 +26,7 @@ public class Prodotto {
         this.iva = iva;
     }
 
-    // Costruttore senza parametri
+    // # Costruttore senza parametri
     public Prodotto() {
 
         // Genera un codice casuale
@@ -39,47 +39,88 @@ public class Prodotto {
         this.iva = "0%";
     }
 
-    // Metodi getter e setter
+    // # Metodi getter e setter
+
+    // codice
     public int getCodice() {
         return this.codice;
     }
 
+    // nome
     public String getNome() {
         return this.nome;
     }
 
+    public void setNome(String nome) {
+        if (nome != null && nome.length() >= 2) {
+            this.nome = nome;
+        } else {
+            this.nome = "Prodotto senza nome";
+        }
+    }
+
+    // descrizione
     public String getDescrizione() {
         return this.descrizione;
     }
 
+    public void setDescrizione(String descrizione) {
+        if (descrizione != null && descrizione.length() >= 2) {
+            this.descrizione = descrizione;
+        } else {
+            this.descrizione = "Nessuna descrizione inserita";
+        }
+    }
+
+    // IVA
     public String getIva() {
         return this.iva;
     }
 
-    public BigDecimal getPrezzo() {
-        return prezzo.setScale(2, RoundingMode.HALF_EVEN);
+    public void setIva(String iva) {
+        if (iva != null) {
+            this.iva = iva;
+        } else {
+            this.iva = "0%";
+        }
     }
 
-    // Metodo per stampare dettagli del prodotto
+    // prezzo
+    public BigDecimal getPrezzo() {
+        return this.prezzo.setScale(2, RoundingMode.HALF_EVEN);
+    }
+
+    public void setPrezzo(BigDecimal prezzo) {
+        if (prezzo != null && prezzo.compareTo(BigDecimal.ZERO) > 0) {
+            this.prezzo = prezzo;
+        } else {
+            this.prezzo = new BigDecimal("0.00");
+        }
+    }
+
+    // # Metodi di istanza
+
+    // stampare dettagli del prodotto
     public void stampaDettagli() {
         System.out.println("Prodotto: " + getNomeEsteso());
-        System.out.println("Descrizione: " + descrizione);
-        System.out.println("Prezzo Senza IVA: " + getPrezzo());
-        System.out.println("IVA: " + iva);
+        System.out.println("Descrizione: " + this.descrizione);
+        System.out.println("Prezzo base: " + getPrezzo());
+        System.out.println("IVA: " + this.iva);
         System.out.println("Prezzo con IVA: " + getPrezzoConIva());
     }
 
-    // Metodo per calcolare prezzo con IVA
+    // calcolare prezzo con IVA
     public BigDecimal getPrezzoConIva() {
-        BigDecimal ivaDecimale = new BigDecimal(iva.replace("%", ""))
+        BigDecimal ivaDecimale = new BigDecimal(this.iva.replace("%", ""))
                 .divide(new BigDecimal("100"));
 
-        BigDecimal prezzoConIva = prezzo.multiply(ivaDecimale).add(prezzo).setScale(2, RoundingMode.HALF_EVEN);
+        BigDecimal prezzoConIva = this.prezzo.multiply(ivaDecimale).add(this.prezzo).setScale(2,
+                RoundingMode.HALF_EVEN);
         return prezzoConIva;
     }
 
-    // Metodo per avere nome esteso (codice-nome)
+    // generare nome esteso (codice-nome)
     public String getNomeEsteso() {
-        return codice + "-" + nome;
+        return this.codice + "-" + this.nome;
     }
 }
